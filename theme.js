@@ -1,11 +1,11 @@
-const SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyBFk0Y77n-qiq4w51J8SOAz49SfmtRDkBmOGAGEdWQB7pAi4M2-PKKdWUB6a_3u7-mEQ/exec";
 let loadedThemes = {};
 
 document.addEventListener("DOMContentLoaded", async () => {
   // Fetch themes from Google Sheets
   await fetchAndPopulateThemes();
 
-  // Get saved theme from localStorage or default to lower-case 'default'
+  // Get saved theme from localStorage or default to 'Default'
   const savedThemeName = (localStorage.getItem("selectedTheme") || "Default").toLowerCase();
   
   // Find key in loadedThemes (case-insensitive lookup)
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   applyTheme(matchingKey);
 
-  // If dropdown exists on this page (e.g., books.html), bind listener
+  // Bind dropdown listener if present on current page (e.g., books.html)
   const dropdown = document.getElementById("themeDropdown");
   if (dropdown) {
     dropdown.value = matchingKey;
@@ -65,7 +65,7 @@ function applyTheme(themeName) {
   const root = document.documentElement;
   root.style.setProperty("--ribbonColor", theme.ribbonColor);
   root.style.setProperty("--siteNameColor", theme.siteNameColor);
-  root.style.setProperty("--siteLogoColor", theme.siteColor); // Mapped siteColor -> --siteLogoColor
+  root.style.setProperty("--siteLogoColor", theme.siteColor);
   root.style.setProperty("--ribbonLinkColor", theme.ribbonLinkColor);
   root.style.setProperty("--bgColor", theme.bgColor);
   root.style.setProperty("--pageTitleColor", theme.pageTitleColor);
