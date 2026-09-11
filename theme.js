@@ -1,21 +1,22 @@
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyBFk0Y77n-qiq4w51J8SOAz49SfmtRDkBmOGAGEdWQB7pAi4M2-PKKdWUB6a_3u7-mEQ/exec";
+const SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
 let loadedThemes = {};
 
 document.addEventListener("DOMContentLoaded", async () => {
-  // Fetch themes from Google Sheets
+  // 1. Fetch themes from Google Sheets
   await fetchAndPopulateThemes();
 
-  // Get saved theme from localStorage or default to 'Default'
+  // 2. Get saved theme from localStorage (or default to 'Default')
   const savedThemeName = (localStorage.getItem("selectedTheme") || "Default").toLowerCase();
   
-  // Find key in loadedThemes (case-insensitive lookup)
+  // 3. Match theme key case-insensitively
   const matchingKey = Object.keys(loadedThemes).find(
     (key) => key.toLowerCase() === savedThemeName
   ) || "Default";
 
+  // 4. Apply current theme to the current page
   applyTheme(matchingKey);
 
-  // Bind dropdown listener if present on current page (e.g., books.html)
+  // 5. If themeDropdown exists on this page (index.html), attach change event listener
   const dropdown = document.getElementById("themeDropdown");
   if (dropdown) {
     dropdown.value = matchingKey;
@@ -41,11 +42,11 @@ async function fetchAndPopulateThemes() {
     }
 
     themes.forEach((theme) => {
-      if (!theme.themeName) return; // Skip empty rows
+      if (!theme.themeName) return; // Skip blank rows
 
       loadedThemes[theme.themeName] = theme;
 
-      // Populate dropdown if present on current page
+      // Fill options if dropdown exists on this page
       if (dropdown) {
         const option = document.createElement("option");
         option.value = theme.themeName;
