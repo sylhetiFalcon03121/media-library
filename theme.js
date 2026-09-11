@@ -64,10 +64,10 @@ function applyTheme(themeName) {
   if (!theme) return;
 
   const root = document.documentElement;
-  root.style.setProperty("--ribbonColor", theme.ribbonColor);
-  root.style.setProperty("--siteNameColor", theme.siteNameColor);
-  root.style.setProperty("--siteLogoColor", theme.siteColor);
-  root.style.setProperty("--ribbonLinkColor", theme.ribbonLinkColor);
-  root.style.setProperty("--bgColor", theme.bgColor);
-  root.style.setProperty("--pageTitleColor", theme.pageTitleColor);
+  root.style.setProperty("--ribbonColor", theme.ribbonColor || "#000000");
+  root.style.setProperty("--siteNameColor", theme.siteNameColor || "#ffffff");
+  root.style.setProperty("--siteLogoColor", theme.siteColor || "#ffffff"); // Fallback to white if empty
+  root.style.setProperty("--ribbonLinkColor", theme.ribbonLinkColor || "#ffffff");
+  root.style.setProperty("--bgColor", theme.bgColor || "#ffffff");
+  root.style.setProperty("--pageTitleColor", theme.pageTitleColor || "#000000");
 }
